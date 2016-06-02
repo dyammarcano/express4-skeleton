@@ -20,7 +20,6 @@ compression    = require 'compression'
 routes         = require './routes/index'
 users          = require './routes/users'
 config         = require './config/config'
-db             = require './config/dbs'
 
 app = express()
 
