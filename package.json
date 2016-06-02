@@ -4,9 +4,6 @@
   "private": true,
   "description": "express, coffee, stylus, pug, mongodb",
   "main": "app.coffee",
-  "directories": {
-    "test": "make test"
-  },
   "scripts": {
     "start": "coffee ./bin/www",
     "test": "test"
