@@ -6,7 +6,7 @@ require('dotenv').config()
 
 app            = require '../app'
 config         = require '../config/config'
-debug          = require('debug') 'remp:server'
+debug          = require('debug') config.app + ':server'
 http           = require 'http'
 
 # Normalize a port into a number, string, or false.
@@ -46,7 +46,7 @@ onListening = ->
     debug "Listening on #{bind}"
 
 # Get port from .env and store in Express.
-port = normalizePort(process.env.PORT) or config.port
+port = process.env.PORT
 app.set 'port', port
 
 # Create HTTP server.
@@ -56,6 +56,5 @@ server = http.createServer app
 server.listen port
 server.on 'error', onError
 server.on 'listening', onListening
-
 
 console.log 'Express server listening on port ' + process.env.PORT + ' in ' + process.env.MODE + ' mode'
