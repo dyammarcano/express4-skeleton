@@ -5,7 +5,9 @@ config         = require '../config/config'
 
 mongoose.connect config.db_name
 Account = new Schema(
-    username: String
-    password: String)
+    role     : Number
+    email    : String
+    username : String
+    password : String)
 Account.plugin LocalMongoose
-module.exports = mongoose.model('Account', Account)
+module.exports = mongoose.model 'Account', Account

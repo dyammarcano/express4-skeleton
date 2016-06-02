@@ -1,6 +1,5 @@
 # node modules
 express        = require 'express'
-connect        = require 'connect'
 path           = require 'path'
 favicon        = require 'serve-favicon'
 logger         = require 'morgan'
@@ -8,7 +7,6 @@ cookieParser   = require 'cookie-parser'
 bodyParser     = require 'body-parser'
 minify         = require 'express-minify'
 favicon        = require 'serve-favicon'
-csurf          = require 'csurf'
 expressSession = require 'express-session'
 MongoStore     = require('connect-mongo')(expressSession)
 mongoose       = require 'mongoose'
@@ -18,14 +16,17 @@ flash          = require 'express-flash'
 compression    = require 'compression'
 
 # locals
-routes         = require './routes/index'
-users          = require './routes/users'
+routes         = require './routes/route'
 config         = require './config/config'
 
 app = express()
 app.use cookieParser()
 
-app.enable 'trust proxy'
+(request, response) ->
+    if request.headers['x-nginx-proxy'] is true
+        app.enable 'trust proxy'
+
+    conlose.log request.headers['user-agent']
 
 # view engine setup
 app.set 'views', path.join __dirname, 'views'
@@ -34,11 +35,16 @@ app.set 'view engine', 'pug'
 # setup session
 app.use expressSession(
     name: config.app
-    saveUninitialized: true
-    resave: true
+    saveUninitialized: false
+    resave: false
+    unset: 'destroy'
     secret: config.session_secret
     store: new MongoStore(
-        url: config.db_name)
+        url: config.db_name
+        ttl: 14 * 24 * 60 * 60
+        autoRemove: 'native'
+        stringify: true
+        collection: 'sessions')
     cookie:
         _expires: null
         httpOnly: true
@@ -54,22 +60,20 @@ app.use bodyParser.urlencoded
     extended: false
 app.use express.static path.join __dirname, 'public_html'
 
+app.use passport.initialize()
+app.use passport.session()
+
 app.use '/', routes
-app.use '/users', users
 
 # login section passport mongoose
 Account = require './models/account'
-
-# csurf section
-# https://github.com/pillarjs/understanding-csrf
-app.use csurf(cookie: true)
 
 passport.use new LocalStrategy(Account.authenticate())
 passport.serializeUser Account.serializeUser()
 passport.deserializeUser Account.deserializeUser()
 
 # catch 404 and forward to error handler
-app.use (req, res, next) ->
+app.use (request, res, next) ->
     err = new Error 'Not Found'
     err.status = 404
     next err
@@ -77,17 +81,17 @@ app.use (req, res, next) ->
 # development error handler
 # will print stacktrace
 if app.get('env') is 'development'
-    app.use (err, req, res, next) ->
-        res.status err.status or 500
-        res.render 'error/' + err.status,
+    app.use (err, request, response, next) ->
+        response.status err.status or 500
+        response.render 'error/error',
             message: err.message,
             error: err
 
 # production error handler
 # no stacktraces leaked to user
-app.use (err, req, res, next) ->
-    res.status err.status or 500
-    res.render 'error/' + err.status,
+app.use (err, request, response, next) ->
+    response.status err.status or 500
+    response.render 'error/error',
         message: err.message,
         error: {}
 
