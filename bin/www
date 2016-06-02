@@ -46,7 +46,7 @@ onListening = ->
     debug "Listening on #{bind}"
 
 # Get port from .env and store in Express.
-port = normalizePort(process.env.PORT)
+port = process.env.PORT
 app.set 'port', port
 
 # Create HTTP server.
