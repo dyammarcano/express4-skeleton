@@ -1,3 +1,2 @@
-
-
-module.exports = config
+module.exports = () ->
+    app = 'myapp'

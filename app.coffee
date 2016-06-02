@@ -9,7 +9,7 @@ minify         = require 'express-minify'
 favicon        = require 'serve-favicon'
 cookieSession  = require 'cookie-session'
 session        = require 'express-session'
-MongoStore     = require('connect-mongo').session
+MongoStore     = require('connect-mongo')(session)
 mongoose       = require 'mongoose'
 passport       = require 'passport'
 LocalStrategy  = require('passport-local').Strategy
@@ -19,8 +19,8 @@ compression    = require 'compression'
 # locals
 routes         = require './routes/index'
 users          = require './routes/users'
-config         = require './models/config'
-db             = require './models/db'
+config         = require './config/config'
+db             = require './config/dbs'
 
 app = express()
 

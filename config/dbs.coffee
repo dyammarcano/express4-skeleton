@@ -1,3 +1,2 @@
-
-
-module.exports = dbs
+module.exports = () ->
+    user = ''
