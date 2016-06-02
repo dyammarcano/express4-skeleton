@@ -5,7 +5,6 @@
 node_modules
 public_html/modules
 .git
-.env
 *.log
 *.out
 *.pid
