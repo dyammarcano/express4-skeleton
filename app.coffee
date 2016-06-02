@@ -4,6 +4,18 @@ favicon = require 'serve-favicon'
 logger = require 'morgan'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
+minify = require 'express-minify'
+
+stylus = require 'stylus'
+favicon = require 'serve-favicon'
+cookieSession = require 'cookie-session'
+session = require 'express-session'
+MongoStore = require('connect-mongo')(session)
+mongoose = require 'mongoose'
+passport = require 'passport'
+LocalStrategy = require('passport-local').Strategy
+flash = require 'express-flash'
+compression = require 'compression'
 
 routes = require './routes/index'
 users = require './routes/users'
@@ -14,13 +26,15 @@ app = express()
 app.set 'views', path.join __dirname, 'views'
 app.set 'view engine', 'pug'
 
+app.use compression()
+app.use minify()
 app.use favicon "#{__dirname}/public_html/favicon.ico"
 app.use logger 'dev'
 app.use bodyParser.json()
 app.use bodyParser.urlencoded
   extended: false
 app.use cookieParser()
-app.use express.static path.join __dirname, 'public'
+app.use express.static path.join __dirname, 'public_html'
 
 app.use '/', routes
 app.use '/users', users
