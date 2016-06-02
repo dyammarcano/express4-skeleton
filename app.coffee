@@ -30,11 +30,11 @@ app.set 'view engine', 'pug'
 # setup session
 app.use session(
     store: new MongoStore(
-        url: 'mongodb://localhost/app001-test'
+        url: config.dbname
         ttl: 14 * 24 * 60 * 60)
-    secret: 'bf0a31b94875704e24d930f7be8c98324d930f7be8c98'
+    secret: config.sessionSecret
     resave: true
-    saveUninitialized: false
+    saveUninitialized: true
     cookie:
         secure: false
         maxAge: new Date(Date.now() + 60 * 1000 * 60))
@@ -45,12 +45,19 @@ app.use favicon "#{__dirname}/public_html/favicon.ico"
 app.use logger 'dev'
 app.use bodyParser.json()
 app.use bodyParser.urlencoded
-  extended: false
+    extended: false
 app.use cookieParser()
 app.use express.static path.join __dirname, 'public_html'
 
 app.use '/', routes
 app.use '/users', users
+
+# login section passport mongoose
+Account = require './models/account'
+
+passport.use new LocalStrategy(Account.authenticate())
+passport.serializeUser Account.serializeUser()
+passport.deserializeUser Account.deserializeUser()
 
 # catch 404 and forward to error handler
 app.use (req, res, next) ->
@@ -58,14 +65,12 @@ app.use (req, res, next) ->
     err.status = 404
     next err
 
-# error handlers
-
 # development error handler
 # will print stacktrace
 if app.get('env') is 'development'
     app.use (err, req, res, next) ->
         res.status err.status or 500
-        res.render 'error/error',
+        res.render 'error/' + err.status,
             message: err.message,
             error: err
 
@@ -73,7 +78,7 @@ if app.get('env') is 'development'
 # no stacktraces leaked to user
 app.use (err, req, res, next) ->
     res.status err.status or 500
-    res.render 'error/error',
+    res.render 'error/' + err.status,
         message: err.message,
         error: {}
 

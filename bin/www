@@ -1,6 +1,9 @@
 #!/usr/bin/env coffee
 
 # Module dependencies.
+
+require('dotenv').config()
+
 app            = require '../app'
 config         = require '../config/config'
 debug          = require('debug') 'remp:server'
@@ -55,4 +58,4 @@ server.on 'error', onError
 server.on 'listening', onListening
 
 
-console.log 'Server start ok\n'
+console.log 'Express server listening on port ' + process.env.PORT + ' in ' + process.env.MODE + ' mode'
