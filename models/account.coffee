@@ -3,7 +3,7 @@ Schema         = mongoose.Schema
 LocalMongoose  = require 'passport-local-mongoose'
 config         = require '../config/config'
 
-mongoose.connect config.dbname
+mongoose.connect config.db_name
 Account = new Schema(
     username: String
     password: String)

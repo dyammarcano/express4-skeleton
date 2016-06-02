@@ -4,10 +4,24 @@ passport       = require 'passport'
 Account        = require '../models/account'
 config         = require '../config/config'
 
+
 # GET
 router.get '/', (req, res, next) ->
+    req.session.ip = req.headers['x-forwarded-for']
+    req.session.cookies = req.cookies
+
+    if typeof req.session.views is 'undefined'
+        req.session.views = 1
+    else
+        req.session.views++
+
     res.render 'homepage',
         title: config.title
+
+        if process.env.MODE is 'development'
+            # console.log 'Cookies: ', req.cookies
+            console.log 'Session: ', req.session
+            # console.log 'Remote IP:', req.session.ip
 
 router.get '/template', (req, res, next) ->
     res.render 'template'
