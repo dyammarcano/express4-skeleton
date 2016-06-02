@@ -1,30 +1,44 @@
-express = require 'express'
-path = require 'path'
-favicon = require 'serve-favicon'
-logger = require 'morgan'
-cookieParser = require 'cookie-parser'
-bodyParser = require 'body-parser'
-minify = require 'express-minify'
+# node modules
+express        = require 'express'
+path           = require 'path'
+favicon        = require 'serve-favicon'
+logger         = require 'morgan'
+cookieParser   = require 'cookie-parser'
+bodyParser     = require 'body-parser'
+minify         = require 'express-minify'
+favicon        = require 'serve-favicon'
+cookieSession  = require 'cookie-session'
+session        = require 'express-session'
+MongoStore     = require('connect-mongo').session
+mongoose       = require 'mongoose'
+passport       = require 'passport'
+LocalStrategy  = require('passport-local').Strategy
+flash          = require 'express-flash'
+compression    = require 'compression'
 
-stylus = require 'stylus'
-favicon = require 'serve-favicon'
-cookieSession = require 'cookie-session'
-session = require 'express-session'
-MongoStore = require('connect-mongo')(session)
-mongoose = require 'mongoose'
-passport = require 'passport'
-LocalStrategy = require('passport-local').Strategy
-flash = require 'express-flash'
-compression = require 'compression'
-
-routes = require './routes/index'
-users = require './routes/users'
+# locals
+routes         = require './routes/index'
+users          = require './routes/users'
+config         = require './models/config'
+db             = require './models/db'
 
 app = express()
 
 # view engine setup
 app.set 'views', path.join __dirname, 'views'
 app.set 'view engine', 'pug'
+
+# setup session
+app.use session(
+    store: new MongoStore(
+        url: 'mongodb://localhost/app001-test'
+        ttl: 14 * 24 * 60 * 60)
+    secret: 'bf0a31b94875704e24d930f7be8c98324d930f7be8c98'
+    resave: true
+    saveUninitialized: false
+    cookie:
+        secure: false
+        maxAge: new Date(Date.now() + 60 * 1000 * 60))
 
 app.use compression()
 app.use minify()
