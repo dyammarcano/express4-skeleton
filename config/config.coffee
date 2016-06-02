@@ -1,8 +1,10 @@
 config = 
-    'app'    : 'myapp'
-    'title'  : 'New Express App'
-    'web'    : 'www.example.com'
-    'user'   : 'myapp'
-    'dbname' : 'mongodb://localhost/app001-test'
+    'app'              : 'myapp'
+    'title'            : 'New Express App'
+    'domain'           : 'www.example.com'
+    'user'             : 'myapp'
+    'port'             : '3000'
+    'dbname'           : 'mongodb://localhost/myapp'
+    'sessionSecret'    : 'bf0a31b94875704e24d930f7be8c98324d930f7be8c98'
 
 module.exports = config

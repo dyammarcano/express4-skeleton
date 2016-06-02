@@ -4,12 +4,9 @@
   "private": true,
   "description": "express, coffee, stylus, pug, mongodb",
   "main": "app.coffee",
-  "directories": {
-    "test": "make test"
-  },
   "scripts": {
     "start": "coffee ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "test"
   },
   "keywords": [
     "express",
@@ -29,6 +26,7 @@
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-alpha.1",
     "debug": "^2.2.0",
+    "dotenv": "^2.0.0",
     "errorhandler": "^1.4.3",
     "express": "^4.13.4",
     "express-flash": "0.0.2",
