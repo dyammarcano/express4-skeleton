@@ -1,1 +1,4 @@
-$(document).ready(function() {$('select').material_select()});
+$(document).ready(function() {
+    Materialize.updateTextFields();
+    $('select').material_select();
+});

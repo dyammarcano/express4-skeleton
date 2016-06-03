@@ -4,8 +4,10 @@ LocalMongoose  = require 'passport-local-mongoose'
 config         = require '../config/config'
 
 mongoose.connect config.db_name
+
 Account = new Schema(
     role      : String
+    parent    : String
     email     : String
     username  : String
     username2 : String

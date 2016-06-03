@@ -6,7 +6,7 @@ config         = require '../config/config'
 
 # GET
 router.get '/', (request, response) ->
-    if request.user
+    if request.isAuthenticated()
         response.redirect '/dashboard'
         return
 
@@ -17,7 +17,7 @@ router.get '/', (request, response) ->
         user: request.user
 
 router.get '/dashboard', (request, response) ->
-    if request.user
+    if request.isAuthenticated()
         response.render 'template.pug',
         title: config.title
         user: request.user
