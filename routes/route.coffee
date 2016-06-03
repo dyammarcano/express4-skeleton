@@ -5,55 +5,55 @@ Account        = require '../models/account'
 config         = require '../config/config'
 
 # GET
-router.get '/', (request, response, next) ->
+router.get '/', (request, response) ->
+    if request.user
+        response.redirect '/dashboard'
+        return
+
     request.session.ip = request.headers['x-forwarded-for']
-
-    if typeof request.cookies.myapp != 'undefined'
-        request.session.cookie = request.cookies.myapp
-
-    if !request.session.views
-        request.session.views = 0
-    
-    request.session.views += 1
 
     response.render 'homepage',
         title: config.title
         user: request.user
-        console.log request.user
 
-router.get '/template', (request, response, next) ->
-    response.render 'template'
+router.get '/dashboard', (request, response) ->
+    if request.user
+        response.render 'template.pug'
+        return
+    else
+        response.redirect '/'
+    return
 
-router.get '/status', (request, response, next) ->
-    status = {time: new Date()}
-    response.jsonp status
-
-router.get '/login', (request, response, next) ->
+router.get '/login', (request, response) ->
     response.render 'login/login',
         title: config.title
 
-router.get '/register', (request, response, next) ->
+router.get '/register', (request, response) ->
     response.render 'login/register',
         title: config.title
 
-router.get '/logout', (request, response, next) ->
+router.get '/logout', (request, response) ->
     request.logout()
     delete request.session
+    console.log request.user
     response.redirect '/'
 
 # POST
 router.post '/register', (request, response) ->
     data =
-        role     : request.body.role
-        email    : request.body.email
-        username : request.body.username
+        role      : request.body.role
+        email     : request.body.email
+        username1 : request.body.username1
+        username2 : request.body.username2
+        surname1  : request.body.surname1
+        surname2  : request.body.surname2
 
     Account.register new Account(data), request.body.password, (err, account) ->
         if err
-            return response.render 'register', account: account
+            return response.render 'login/register', account: account
 
-        passport.authenticate('local') request, response, ->
-            request.user.username = request.body.username
+        passport.authenticate('local') (request, response) ->
+            request.user.username1 = request.body.username1
             response.redirect '/'
             return
         return

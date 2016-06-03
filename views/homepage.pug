@@ -9,7 +9,9 @@ block content
             br
             a(href="/register") Register
         if (user)
-            h1 Welcome #{user.username}
-            p You are currently logged in as #{user.username}
+            h1 Welcome #{user.username1}
+            p You are currently logged in as #{user.username1}
             p Session ID #{user._id}
             a(href="/logout") Logout
+            br
+            a(href="/dashboard") Dashboard

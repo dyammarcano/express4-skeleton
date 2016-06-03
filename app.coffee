@@ -22,11 +22,14 @@ config         = require './config/config'
 app = express()
 app.use cookieParser()
 
-(request, response) ->
+app.all '*', (request, response, next) ->
     if request.headers['x-nginx-proxy'] is true
         app.enable 'trust proxy'
 
-    conlose.log request.headers['user-agent']
+    #console.log request.headers['user-agent']
+
+    next()
+    return
 
 # view engine setup
 app.set 'views', path.join __dirname, 'views'

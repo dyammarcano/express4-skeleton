@@ -3,18 +3,41 @@ extends ../layouts/layout
 block content
     .container
         h1 Register Page
+        if (account)
+            p #{account}
+            br
         p.lead Say something worthwhile here.
         br
-        form(role='form', action="/register",method="post", style='max-width: 300px;')
+        form(role='form', action="/register",method="post")
             .form-group
-                input.form-control(type='text', name="username", placeholder='Enter Username')
+                input.form-control(type='text', name="username", placeholder='Enter First Name')
+            .form-group
+                input.form-control(type='text', name="username2", placeholder='Enter Second Name')
+            .form-group
+                input.form-control(type='text', name="surname1", placeholder='Enter First Surname')
+            .form-group
+                input.form-control(type='text', name="surname2", placeholder='Enter Second Surname')
             .form-group
                 input.form-control(type='email', name="email", placeholder='Enter Email')
             .form-group
                 input.form-control(type='password', name="password", placeholder='Enter Password')
             .form-group
-                input.form-control(type='password', name="repassword", placeholder='Re Enter Password')
+                input.form-control(type='password', name="password1", placeholder='Re Enter Password')
+            .input-field.col.s12
+                select(name="role")
+                    option(value='', disabled='', selected='') Choose role
+                    option(value='1') Option 1
+                    option(value='2') Option 2
+                    option(value='3') Option 3
+                    option(value='4') Option 4
+                    option(value='5') Option 5
+                    option(value='6') Option 6
+                    option(value='7') Option 7
+            br
             button.btn.btn-default(type='submit') Submit
 
             a(href='/')
                 button.btn.btn-primary(type="button") Cancel
+
+    block scripts
+        script(src="/javascripts/register.js")
