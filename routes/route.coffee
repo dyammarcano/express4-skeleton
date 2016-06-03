@@ -18,7 +18,9 @@ router.get '/', (request, response) ->
 
 router.get '/dashboard', (request, response) ->
     if request.user
-        response.render 'template.pug'
+        response.render 'template.pug',
+        title: config.title
+        user: request.user
         return
     else
         response.redirect '/'
@@ -41,19 +43,21 @@ router.get '/logout', (request, response) ->
 # POST
 router.post '/register', (request, response) ->
     data =
-        role      : request.body.role
-        email     : request.body.email
-        username1 : request.body.username1
-        username2 : request.body.username2
-        surname1  : request.body.surname1
-        surname2  : request.body.surname2
+        role      : request.body.role.trim().toLowerCase()
+        email     : request.body.email.trim().toLowerCase()
+        username  : request.body.username.trim().toLowerCase()
+        username2 : request.body.username2.trim().toLowerCase()
+        surname1  : request.body.surname1.trim().toLowerCase()
+        surname2  : request.body.surname2.trim().toLowerCase()
 
-    Account.register new Account(data), request.body.password, (err, account) ->
+    console.log data
+
+    Account.register new Account(data), request.body.password.trim(), (err, account) ->
         if err
             return response.render 'login/register', account: account
 
         passport.authenticate('local') (request, response) ->
-            request.user.username1 = request.body.username1
+            request.user.username = request.body.username.trim().toLowerCase()
             response.redirect '/'
             return
         return

@@ -1,17 +1,22 @@
 extends layouts/layout
 
 block content
+    nav.light-blue.lighten-1(role='navigation')
+        .nav-wrapper
+            a.brand-logo(href='') Logo
+            ul#nav-mobile.right.hide-on-med-and-down
+                li
+                    a(href='/login') Login
+                if (!user)
+                    li
+                        a(href='/register') Register
+                if (user)
+                    li
+                        a(href='/logout') Logout
     .container
         if (!user)
             h1= title
             p Welcome to #{title}
-            a(href="/login") Login
-            br
-            a(href="/register") Register
         if (user)
-            h1 Welcome #{user.username1}
-            p You are currently logged in as #{user.username1}
-            p Session ID #{user._id}
-            a(href="/logout") Logout
-            br
-            a(href="/dashboard") Dashboard
+            h1= title
+            p Welcome #{user.username}

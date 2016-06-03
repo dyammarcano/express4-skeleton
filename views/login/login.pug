@@ -1,6 +1,12 @@
 extends ../layouts/layout
 
 block content
+    nav.light-blue.lighten-1(role='navigation')
+        .nav-wrapper
+            a.brand-logo(href='') Logo
+            ul#nav-mobile.right.hide-on-med-and-down
+                li
+                    a(href='/') Back
     .container
         h1 Login Page
         p.lead Say something worthwhile here.
