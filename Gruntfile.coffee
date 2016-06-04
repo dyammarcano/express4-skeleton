@@ -2,24 +2,34 @@ module.exports = (grunt) ->
     # Project configuration.
     grunt.initConfig
         coffee:
-            app:
+            build:
                 cwd: 'resources/coffee'
                 src: ['*.coffee']
                 dest: 'public_html/javascripts/'
                 expand: true
                 ext: '.js'
+            watch:
+                files: 'resources/coffee/*.coffee'
+                spawn: false
+                tasks: ['default']
         stylus:
-            app:
+            build:
                 cwd: 'resources/stylus'
                 compress: true
                 src: ['*.styl']
                 dest: 'public_html/stylesheets/'
                 expand: true
                 ext: '.css'
+            watch:
+                files: 'resources/stylus/*.styl'
+                spawn: false
+                tasks: ['default']
         watch:
-            app:
-                files: 'resources/coffee/*.coffee, resources/stylus/*.styl'
+            scripts:
                 tasks: ['coffee', 'stylus']
+                options:
+                    livereload: true
+                    event:['all']
 
     # These plugins provide necessary tasks.
     grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -27,4 +37,4 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-watch'
 
     # Default task.
-    grunt.registerTask 'default', ['coffee, stylus, watch']
+    grunt.registerTask 'default', ['watch']
