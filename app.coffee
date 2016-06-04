@@ -50,7 +50,7 @@ app.use expressSession(
         maxAge: 60 * 60 * 24 * 7)
 
 app.use compression()
-app.use favicon "#{__dirname}/public_html/favicon.ico"
+app.use favicon "#{__dirname}/public_html/precomposed.png"
 app.use logger 'dev'
 app.use bodyParser.json()
 app.use bodyParser.urlencoded
