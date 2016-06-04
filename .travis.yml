@@ -1,8 +1,13 @@
+language: node_js
+node_js:
+  - "5.1.x"
+before_install:
+  - npm install --only=dev
+services:
+  - mongodb
 install:
   - npm install
-  - npm install --only=dev
   - bower install
-
 branches:
   only:
     - test
