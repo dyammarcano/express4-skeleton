@@ -5,14 +5,11 @@ favicon        = require 'serve-favicon'
 logger         = require 'morgan'
 cookieParser   = require 'cookie-parser'
 bodyParser     = require 'body-parser'
-minify         = require 'express-minify'
 favicon        = require 'serve-favicon'
 expressSession = require 'express-session'
 MongoStore     = require('connect-mongo')(expressSession)
-mongoose       = require 'mongoose'
 passport       = require 'passport'
 LocalStrategy  = require('passport-local').Strategy
-flash          = require 'express-flash'
 compression    = require 'compression'
 
 # locals
@@ -55,7 +52,6 @@ app.use expressSession(
         maxAge: 60 * 60 * 24 * 7)
 
 app.use compression()
-app.use minify()
 app.use favicon "#{__dirname}/public_html/favicon.ico"
 app.use logger 'dev'
 app.use bodyParser.json()
