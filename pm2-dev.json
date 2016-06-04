@@ -1,0 +1,13 @@
+﻿{
+    "apps": [{
+        "name"            : "webApp",
+        ".coffee"         : "coffee",
+        "script"          : "./bin/www.coffee",
+        "instances"       : "1",
+        "exec_mode"       : "cluster",
+        "out_file"        : "logs/logs.log",
+        "log_date_format" : "DD-MM-YYYY HH:mm Z",
+        "ignoreWatch"     : ["[\\/\\\\]\\./", "node_modules", ".git", "logs", "test"],
+        "watch"           : true
+    }]
+}
