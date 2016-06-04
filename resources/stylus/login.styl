@@ -19,6 +19,16 @@ html, body
     margin 0
     height 100%
 
+[type="checkbox"]:checked
+    & + label
+        &:before
+            border-right 2px solid $color2
+            border-bottom: 2px solid $color2
+
+[type="checkbox"] + label:before,
+[type="checkbox"]:not(.filled-in) + label:after
+    border 2px solid $color2
+
 .login-form
     width 350px
     padding 40px 30px

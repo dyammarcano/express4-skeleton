@@ -18,11 +18,17 @@ block content
             span.tooltipped.col.s4.offset-s4.l2.offset-l1.red(data-position='right', data-delay='50', data-tooltip='Input Required:')
 
         span.alert Invalid Credentials
-        a.link(href='#') Lost your password?
+        a.link(href='/manager') Lost your password?
+
+        p
+            input#remember(type='checkbox', name='remember')
+            label(for='remember') Remember
+        p
+
         button.log-btn(type='submit') Enter
         p.link
             | Not registered? 
-            a(href='#') Register
+            a(href='/register') Register
 
     block scripts
         script(src="/javascripts/login.js")
