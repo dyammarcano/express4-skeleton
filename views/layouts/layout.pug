@@ -9,7 +9,8 @@ html
 
         link(rel="stylesheet", href="/fonts/fonts.css")
         link(rel="stylesheet", href="/modules/Materialize/dist/css/materialize.min.css")
-        link(rel="stylesheet", href="/stylesheets/preloader.css")
+        if (!user)
+            link(rel="stylesheet", href="/stylesheets/preloader.css")
 
         block styles
     body
@@ -19,15 +20,17 @@ html
             <![endif]
 
         #content
-            #loader-wrapper
-                #loader
-                .loader-section.section-left
-                .loader-section.section-right
+            if (!user)
+                #loader-wrapper
+                    #loader
+                    .loader-section.section-left
+                    .loader-section.section-right
 
             block content
 
         script(src="/modules/jquery/dist/jquery.min.js")
         script(src="/modules/Materialize/dist/js/materialize.min.js")
-        script(src="/javascripts/preloader.js")
+        if (!user)
+            script(src="/javascripts/preloader.js")
 
         block scripts

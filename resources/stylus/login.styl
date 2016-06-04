@@ -1,9 +1,14 @@
+$color1 = #ECE6DE
+$color2 = #8D7249
+$color3 = #FFFFFF
+$color4 = #ed1c24
+
 body
-    background #ECE6DE
+    background $color1
     font-family "Roboto", sans-serif
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
-    background-image linear-gradient(to bottom, #ECE6DE, #ECE6DE 70%, #ffffff 70%, #ffffff)
+    background-image linear-gradient(to bottom, $color1, $color1 70%, $color3 70%, $color3)
     background-size cover
     background-repeat no-repeat
 
@@ -14,7 +19,7 @@ html, body
 .login-form
     width 350px
     padding 40px 30px
-    background #fff
+    background $color3
     -moz-border-radius 4px
     -webkit-border-radius 4px
     border-radius 4px
@@ -28,7 +33,7 @@ html, body
     -webkit-transform translateY(-50%)
     transform translateY(-50%)
     .thumbnail
-        background #8D7249
+        background $color2
         width 200px
         height 200px
         margin 0 auto 20px
@@ -52,11 +57,11 @@ html, body
         border-bottom-right-radius 100%
         box-sizing border-box
     label
-        border-color #8D7249
-        color #8D7249
+        border-color $color2
+        color $color2
     input
-        border-color #8D7249
-        color #8D7249
+        border-color $color2
+        color $color2
 
 .form-group
     position relative
@@ -67,7 +72,7 @@ html, body
     height 50px
     border none
     padding 5px 7px 5px 15px
-    background #fff
+    background $color3
     color #666
     border 2px solid #ddd
     -moz-border-radius 4px
@@ -75,8 +80,8 @@ html, body
     border-radius 4px
 
 .form-control:focus, .form-control:focus + .fa
-    border-color #8D7249
-    color #8D7249
+    border-color $color2
+    color $color2
 
 .log-status
     &.wrong-entry
@@ -85,16 +90,16 @@ html, body
         animation wrong-log 0.3s
 
 .log-status.wrong-entry .form-control, .wrong-entry .form-control + .fa
-    border-color #ed1c24
-    color #ed1c24
+    border-color $color4
+    color $color4
 
 .log-btn
-    background #8D7249
+    background $color2
     dispaly inline-block
     width 100%
     font-size 16px
     height 50px
-    color #fff
+    color $color3
     text-decoration none
     border none
     -moz-border-radius 4px

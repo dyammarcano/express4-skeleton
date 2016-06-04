@@ -11,6 +11,7 @@ module.exports = (grunt) ->
         stylus:
             app:
                 cwd: 'resources/stylus'
+                compress: true
                 src: ['*.styl']
                 dest: 'public_html/stylesheets/'
                 expand: true
