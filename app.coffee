@@ -23,8 +23,6 @@ app.all '*', (request, response, next) ->
     if request.headers['x-nginx-proxy'] is true
         app.enable 'trust proxy'
 
-    #console.log request.headers['user-agent']
-
     next()
     return
 

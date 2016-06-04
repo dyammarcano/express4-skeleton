@@ -26,6 +26,10 @@
     "Materialize": "materialize#^0.97.6",
     "moment": "^2.13.0",
     "modernizr-min": "^3.2.0",
-    "angular": "^1.5.6"
+    "angular": "^1.5.6",
+    "jquery-validation": "^1.15.0"
+  },
+  "devDependencies": {
+    "livereload-js": "^2.2.1"
   }
 }

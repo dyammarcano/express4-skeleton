@@ -1,8 +1,5 @@
-(function() {
-  $(document).ready(function() {
-    setTimeout((function() {
-      $('body').addClass('loaded');
-    }), 2000);
-  });
-
-}).call(this);
+$(document).ready(function() {
+  setTimeout((function() {
+    $('body').addClass('loaded');
+  }), 2000);
+});

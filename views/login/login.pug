@@ -10,9 +10,13 @@ block content
         .form-group.log-status.input-field.col.s6
             input#user_name.form-control.validate(type='text', name='username', required='')
             label(for='user_name') Username:
+            span.tooltipped.col.s4.offset-s4.l2.offset-l1.red(data-position='right', data-delay='50', data-tooltip='Input Required:')
+
         .form-group.log-status.input-field.col.s6
             input#user_name.form-control.validate(type='password', name='password', required='')
             label(for='user_pass') Password:
+            span.tooltipped.col.s4.offset-s4.l2.offset-l1.red(data-position='right', data-delay='50', data-tooltip='Input Required:')
+
         span.alert Invalid Credentials
         a.link(href='#') Lost your password?
         button.log-btn(type='submit') Enter
@@ -21,4 +25,4 @@ block content
             a(href='#') Register
 
     block scripts
-        script(src="/javascripts/register.js")
+        script(src="/javascripts/login.js")

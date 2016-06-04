@@ -9,18 +9,6 @@ config         = require '../config/config'
 debug          = require('debug') config.app + ':server'
 http           = require 'http'
 
-# Normalize a port into a number, string, or false.
-normalizePort = (val) ->
-    port = parseInt val, 10
-
-    # named pipe
-    if isNaN port
-        val
-    # port number
-    else if port >= 0
-        port
-    false
-
 # Event listener for HTTP server "error" event.
 onError = (error) ->
     if error.syscall isnt 'listen'
