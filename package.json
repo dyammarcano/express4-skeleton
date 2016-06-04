@@ -54,6 +54,8 @@
     "stylus": "^0.54.5"
   },
   "devDependencies": {
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-stylus": "^1.2.0",
     "mocha": "^2.5.3",
     "should": "^9.0.0"
   }

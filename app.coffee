@@ -56,7 +56,7 @@ app.use expressSession(
 
 app.use compression()
 app.use minify()
-app.use favicon "#{__dirname}/public_html/node-icon.png"
+app.use favicon "#{__dirname}/public_html/favicon.ico"
 app.use logger 'dev'
 app.use bodyParser.json()
 app.use bodyParser.urlencoded

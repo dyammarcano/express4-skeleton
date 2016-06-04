@@ -9,6 +9,7 @@ html
 
         link(rel="stylesheet", href="/fonts/fonts.css")
         link(rel="stylesheet", href="/modules/Materialize/dist/css/materialize.min.css")
+        link(rel="stylesheet", href="/stylesheets/preloader.css")
 
         block styles
     body
@@ -17,9 +18,16 @@ html
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
             <![endif]
 
-        block content
+        #content
+            #loader-wrapper
+                #loader
+                .loader-section.section-left
+                .loader-section.section-right
+
+            block content
 
         script(src="/modules/jquery/dist/jquery.min.js")
         script(src="/modules/Materialize/dist/js/materialize.min.js")
+        script(src="/javascripts/preloader.js")
 
         block scripts

@@ -40,6 +40,12 @@ router.get '/logout', (request, response) ->
     console.log request.user
     response.redirect '/'
 
+router.get '/hello/:name', (request, response, next) ->
+    response.send request.params.name
+
+router.get '/v1/:name(article|article2|article3)?', (request, response, next) ->
+    response.send request.params.name
+
 # POST
 router.post '/register', (request, response) ->
     data =

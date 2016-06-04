@@ -1,27 +1,24 @@
 extends ../layouts/layout
 
+block styles
+    link(rel="stylesheet", href="/stylesheets/login.css")
+
 block content
-    nav.container.light-blue.lighten-1(role='navigation')
-        .nav-wrapper
-            a.brand-logo(href='') Logo
-            ul#nav-mobile.right.hide-on-med-and-down
-                li
-                    a(href='/') Back
-    .container
-        h1 Login Page
-        br
-        form(role='form', action="/login", method="post").col.s12
-            .input-field.col.s6
-                input#user_name.validate(type='text', name="username")
-                label(for='user_name') Enter Username
-
-            .input-field.col.s6
-                input#user_pass.validate(type='password', name="password")
-                label(for='user_pass') Enter Password
-
-            button.btn.btn-default(type='submit') Enter
-            a(href='/')
-                button.btn.btn-primary(type="button") Cancel
+    form.login-form.z-depth-3(role='form', action='/login', method='post')
+        .thumbnail
+            img(src='/images/logo_blanco.png')
+        .form-group.log-status.input-field.col.s6
+            input#user_name.form-control.validate(type='text', name='username', required='')
+            label(for='user_name') Username:
+        .form-group.log-status.input-field.col.s6
+            input#user_name.form-control.validate(type='password', name='password', required='')
+            label(for='user_pass') Password:
+        span.alert Invalid Credentials
+        a.link(href='#') Lost your password?
+        button.log-btn(type='submit') Enter
+        p.link
+            | Not registered? 
+            a(href='#') Register
 
     block scripts
         script(src="/javascripts/register.js")
