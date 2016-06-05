@@ -1,5 +1,6 @@
 mongoose       = require 'mongoose'
 Schema         = mongoose.Schema
+LocalMongoose  = require 'passport-local-mongoose'
 config         = require '../config/config'
 
 ##############################################################################################
@@ -12,8 +13,24 @@ mongoose.connect config.db_name
 # Declare Schema.
 ##############################################################################################
 
-Worker = new Schema(
+Temporal = new Schema(
     role      : String
-    parent    : String)
+    parent    : String
+    email     : 
+        type: String
+        unique: true
+        required: true
+    username  : String
+    username2 : String
+    surname1  : String
+    surname2  : String
+    password  : 
+        type: String
+        required: true
+    created   : 
+        type: Date
+        default: Date.now)
 
-module.exports = mongoose.model 'worker', Worker
+Temporal.plugin LocalMongoose
+
+module.exports = mongoose.model 'Temporal', Temporal

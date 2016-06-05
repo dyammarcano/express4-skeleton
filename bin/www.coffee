@@ -1,7 +1,5 @@
 #!/usr/bin/env coffee
 
-# Module dependencies.
-
 require('dotenv').config()
 
 app            = require '../app'
@@ -9,7 +7,10 @@ config         = require '../config/config'
 debug          = require('debug') config.app + ':server'
 http           = require 'http'
 
+##############################################################################################
 # Event listener for HTTP server "error" event.
+##############################################################################################
+
 onError = (error) ->
     if error.syscall isnt 'listen'
         throw error
@@ -27,21 +28,37 @@ onError = (error) ->
         else
             throw error
 
+##############################################################################################
 # Event listener for HTTP server "listening" event.
+##############################################################################################
+
 onListening = ->
     addr = server.address()
     bind = if typeof addr is 'string' then "pipe #{addr}" else "port #{addr.port}"
     debug "Listening on #{bind}"
 
+##############################################################################################
 # Get port from .env and store in Express.
+##############################################################################################
+
 port = process.env.PORT
 app.set 'port', port
 
+##############################################################################################
 # Create HTTP server.
+##############################################################################################
+
 server = http.createServer(app).listen port
 
+##############################################################################################
 # Listen on provided port, on all network interfaces.
+##############################################################################################
+
 server.on 'error', onError
 server.on 'listening', onListening
 
-console.log 'Express server listening on port ' + process.env.PORT + ' in ' + process.env.MODE + ' mode'
+##############################################################################################
+# Print console information.
+##############################################################################################
+
+console.log 'Express server ready in (' + process.env.MODE + ') mode http://localhost:' + process.env.PORT
