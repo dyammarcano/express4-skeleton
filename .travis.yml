@@ -1,6 +1,10 @@
 language: node_js
 node_js:
-  - "5.1.x"
+  - "node"
+  - "0.12"
+  - "4"
+  - "5"
+sudo: false
 before_install:
   - npm install --only=dev
 services:
