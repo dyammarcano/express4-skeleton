@@ -5,13 +5,3 @@ node_js:
   - "4"
   - "5"
 sudo: false
-before_install:
-  - npm install --only=dev
-services:
-  - mongodb
-install:
-  - npm install
-  - bower install
-branches:
-  only:
-    - test
